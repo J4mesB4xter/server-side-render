@@ -3,3 +3,8 @@ html
     title= title
   body
     h1= message
+    ul
+      each issue in issues
+          li
+            h2= issue.title
+            p= issue.description

@@ -7,13 +7,9 @@ const port = 3000
 app.set('view engine', 'pug')
 
 
-app.get('/j', (req, res) => {
-    res.render('index', { title: 'NODEmon', message: 'Nodemon is the mon!' })
-})
-
 app.get('/issues', async (req, res) => {
     let issues = await getIssues()
-    res.send(issues)
+    res.render('index', {issues: issues})
 })
 
 app.listen(port, () => {
@@ -25,5 +21,5 @@ async function getIssues() {
     let response = await fetch('http://localhost:8000/issues.json')
     .then(R => R.json())
     .catch(E => null)
-    return response
+    return response.data
 }
