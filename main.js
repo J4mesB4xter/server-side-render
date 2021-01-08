@@ -4,9 +4,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.set('view engine', 'pug')
 
-app.get('/', (req, res) => {
-    res.send('Hello ' + req.query.name)
+
+app.get('/j', (req, res) => {
+    res.render('index', { title: 'NODEmon', message: 'Nodemon is the mon!' })
 })
 
 app.get('/issues', async (req, res) => {
