@@ -8,8 +8,13 @@ const port = 3000
 app.set('view engine', 'pug')
 
 function readJson(filename) {
-  let text = fs.readFileSync(filename, 'utf8')
-  return JSON.parse(text)
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, (err, text) => {
+      if (err) reject('json not found');
+      let data = JSON.parse(text);
+      resolve(data)
+    });
+  })
 }
 
 app.get('/issues', async (req, res) => {
