@@ -1,10 +1,7 @@
-html
-  head
-    title= title
-  body
-    h1= message
-    ul
-      each issue in issues
-          li
-            h2= issue.title
-            p= issue.description
+extends base.pug
+block content
+  h1 
+    | Issues
+  each issue in issues
+    h2= issue.title
+    p= issue.description
