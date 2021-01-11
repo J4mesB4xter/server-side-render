@@ -37,3 +37,21 @@ async function getIssues() {
   .catch(E => readJson('./data/issues.json'))
   return response.data
 }
+//CONTRIBUTOR VIEW
+
+app.get('/contributors/:id', async (req, res) => {
+  let id = req.params.id
+  console.log(id)
+  let contributor = await getContributor(id)
+  res.render('contributor', {contributor: contributor})
+})
+
+async function getContributor(id) {
+  let response = await fetch(`http://localhost:8000/contributors/${id}.json`)
+  .then(R => R.json())
+  .catch(async (E) => {
+    let allContributors = await readJson(`./data/contributors.json`);
+    return allContributors.find(C => C.id == id)
+  })
+  return response.data
+}
