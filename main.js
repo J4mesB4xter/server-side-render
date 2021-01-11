@@ -41,7 +41,6 @@ async function getIssues() {
 
 app.get('/contributors/:id', async (req, res) => {
   let id = req.params.id
-  console.log(id)
   let contributor = await getContributor(id)
   res.render('contributor', {contributor: contributor})
 })
