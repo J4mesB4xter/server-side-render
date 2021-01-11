@@ -1,7 +1,13 @@
 extends base.pug
 block content
-  h1 
+  h1(class="title is-1")
     | Issues
   each issue in issues
-    h2= issue.title
-    p= issue.description
+    h2(class="title is-4 mb-5")= issue.title
+    p(class="subtitle mb-2")= issue.description
+    if issue.status == "Completed"
+      div(class="tag is-success mb-6")= issue.status
+    else if issue.status == "Not Started"
+      div(class="tag is-danger mb-6")= issue.status
+    else if issue.status == "In Progress"
+      div(class="tag is-warning mb-6")= issue.status
