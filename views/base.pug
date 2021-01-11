@@ -3,4 +3,6 @@ html
     style
       include ../node_modules/bulma/css/bulma.css
   body
-    block content
+    include navbar.pug
+    div(class='has-background-primary')
+      block content

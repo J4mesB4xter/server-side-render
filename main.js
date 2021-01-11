@@ -24,7 +24,7 @@ async function readJson(filename) {
 
 app.get('/issues', async (req, res) => {
   let issues = await getIssues()
-  res.render('index', {issues: issues})
+  res.render('issues', {issues: issues})
 })
 
 app.listen(port, () => {
