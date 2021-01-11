@@ -4,8 +4,15 @@ block content
     each issue in issues
       div(class="issue box has-background-primary-light" data-author=issue.author)
         h2(class="title is-4 mb-0")= issue.title
-        div(class="author has-text-grey mb-5")
-          |created by: ...
+        div(class="has-text-grey mb-5")
+          span
+            |created by: 
+          span(class="author")
+            |...
+          span
+            |&nbsp; on: 
+          span(class="created-at")
+            |...
         p(class="subtitle mb-2")= issue.description
         if issue.status == "Completed"
           div(class="tag is-success")= issue.status
