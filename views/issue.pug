@@ -1,0 +1,26 @@
+extends base.pug
+block content
+  div(class="issue container box has-background-primary-light" data-author=issue.author)
+    h2(class="title")= issue.title
+    div(class="has-text-grey")
+      span
+        |created by: 
+      a(class="author" href=`/contributors/${issue.author}`)
+        |...
+      span
+        |&nbsp; on: 
+      span(class="created-at")= issue.created-at
+        |...
+    span
+      |severity:&nbsp;
+      div(class="tag is-light mb-5 is-rounded")= issue.severity
+    p(class="subtitle mb-2")= issue.description
+    if issue.status == "Completed"
+      div(class="tag is-success is-small")= issue.status
+    else if issue.status == "Not Started"
+      div(class="tag is-danger is-small")= issue.status
+    else if issue.status == "In Progress"
+      div(class="tag is-warning is-small")= issue.status
+
+  script
+    include issue.js

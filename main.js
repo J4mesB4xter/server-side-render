@@ -22,6 +22,7 @@ async function readJson(filename) {
 //   })
 // }
 
+//ISSUE VIEW ALL
 app.get('/issues', async (req, res) => {
   let issues = await getIssues()
   res.render('issues', {issues: issues})
@@ -37,8 +38,24 @@ async function getIssues() {
   .catch(E => readJson('./data/issues.json'))
   return response.data
 }
-//CONTRIBUTOR VIEW
+//ISSUE VIEW ONE
+app.get('/issues/:id', async (req, res) => {
+  let id = req.params.id
+  let issue = await getIssue(id)
+  res.render('issue', {issue: issue})
+})
 
+async function getIssue(id) {
+  let response = await fetch(`http://localhost:8000/issues/${id}.json`)
+  .then(R => R.json())
+  .catch(async (E) => {
+    let allIssues = await readJson(`./data/issues.json`);
+    return allIssues.find(I => I.id == id)
+  })
+  return response.data
+}
+
+//CONTRIBUTOR VIEW ONE
 app.get('/contributors/:id', async (req, res) => {
   let id = req.params.id
   let contributor = await getContributor(id)
