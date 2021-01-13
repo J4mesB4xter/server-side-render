@@ -1,6 +1,6 @@
 extends base.pug
 block content
-  div(class="issue container box has-background-primary-light" data-author=issue.author)
+  div(class="issue container box has-background-primary-light" data-id=issue.id data-author=issue.author)
     h2(class="title")= issue.title
     div(class="has-text-grey")
       span
@@ -21,6 +21,10 @@ block content
       div(class="tag is-danger is-small")= issue.status
     else if issue.status == "In Progress"
       div(class="tag is-warning is-small")= issue.status
+  div(class="comment container box has-background-primary-light")
+    h3(class="box")
+      h4(class="tag")
+
 
   script
     include issue.js

@@ -12,6 +12,7 @@ async function readJson(filename) {
   return(data)
 }
 // equivalent with promises:
+//
 // function readJson(filename) {
 //   return new Promise((resolve, reject) => {
 //     fs.readFile(filename, (err, text) => {
@@ -38,6 +39,7 @@ async function getIssues() {
   .catch(E => readJson('./data/issues.json'))
   return response.data
 }
+
 //ISSUE VIEW ONE
 app.get('/issues/:id', async (req, res) => {
   let id = req.params.id
