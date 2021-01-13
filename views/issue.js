@@ -15,6 +15,7 @@ function hydrateDate(issueElement) {
 
 async function hydrateAuthor(issueElement) {
   let id = issueElement.getAttribute('data-author');
+  console.log(id)
   let response = await fetch(`http://localhost:8000/contributors/${id}.json`)
     .then(R => R.json())
     .catch(E => null);
@@ -28,10 +29,27 @@ async function hydrateComments(issueElement) {
   let response = await fetch(`http://localhost:8000/comments.json/?issue=${id}`)
     .then(R => R.json())
     .catch(E => null);
-  //assign response data to variable we can call in issue.pug
-  for (let comment of response) {
-    console.log(comment)
+    
+  let commentsElement = document.querySelector('.comments')
+  for (let comment of response.data) {
+    let commentElement = document.createElement('div');
+    commentElement.classList.add('box')
+    commentElement.setAttribute('data-author', comment.author);
+
+    let authorElement = document.createElement('div')
+    authorElement.classList.add('author')
+
+    let bodyElement = document.createElement('p');
+    bodyElement.innerText = comment.body;
+
+
+    commentElement.appendChild(authorElement)
+    commentElement.appendChild(bodyElement)
+    commentsElement.appendChild(commentElement)
+    hydrateAuthor(commentElement)
+
   }
+  
 }
 
 hydrateIssuePage()

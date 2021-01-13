@@ -21,9 +21,8 @@ block content
       div(class="tag is-danger is-small")= issue.status
     else if issue.status == "In Progress"
       div(class="tag is-warning is-small")= issue.status
-  div(class="comment container box has-background-primary-light")
-    h3(class="box")
-      h4(class="tag")
+  
+  div(class="comments container has-background-primary")
 
 
   script
