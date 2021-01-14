@@ -35,19 +35,26 @@ async function hydrateComments(issueElement) {
     let commentElement = document.createElement('div');
     commentElement.classList.add('box');
     commentElement.setAttribute('data-author', comment.author);
+    commentElement.classList.add('has-background-primary-light')
 
-    let authorElement = document.createElement('div');
+    let authorElement = document.createElement('a');
     authorElement.classList.add('author');
+    authorElement.setAttribute('href', `/contributors/${comment.author}`);
+    
 
     let bodyElement = document.createElement('p');
     bodyElement.innerText = comment.body;
+    
 
-    let createdAtElement = document.createElement('p');
+    let readableDate = formatIso(commentElement.getAttribute('data-created-at'));
+    
+    let createdAtElement = document.createElement('span');
     createdAtElement.innerText = comment.created_at;
-    createdAtElement.innerText = formatIso(commentElement.getAttribute('data-created-at'));
-    commentElement.appendChild(createdAtElement)
+    createdAtElement.innerText = ` on: ${readableDate}`
+    createdAtElement.classList.add('has-text-grey')
 
     commentElement.appendChild(authorElement);
+    commentElement.appendChild(createdAtElement)
     commentElement.appendChild(bodyElement);
     commentsElement.appendChild(commentElement);
     hydrateAuthor(commentElement);
