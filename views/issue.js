@@ -1,6 +1,5 @@
 async function hydrateIssuePage() {
   let issueElement = document.querySelector('.issue');
-  console.log(issueElement)
 
   hydrateAuthor(issueElement)
   hydrateDate(issueElement)
@@ -65,3 +64,72 @@ async function hydrateComments(issueElement) {
 }
 
 hydrateIssuePage()
+
+
+
+//COMMENT BOX
+
+ async function postComment() {
+  let commentElement = document.createElement('div');
+  commentElement.classList.add('box');
+  commentElement.setAttribute('data-author', comment.author);
+  commentElement.classList.add('has-background-primary-light')
+
+  let authorElement = document.createElement('a');
+  authorElement.classList.add('author');
+  authorElement.setAttribute('href', `/contributors/${comment.author}`);
+  
+
+  let bodyElement = document.createElement('p');
+  bodyElement.innerText = 'comment-body';
+  
+  let idElement = document.createElement('p')
+  let response = await fetch(`http://localhost:8000/comments.json`)
+    .then(R => R.json())
+    .catch(E=> null);
+  penult = response.data[-1]
+  idElement.innerText = penult.id + 1
+
+
+  
+
+  let readableDate = formatIso(commentElement.getAttribute('data-created-at'));
+  
+  let createdAtElement = document.createElement('span');
+  createdAtElement.innerText = comment.created_at;
+  createdAtElement.innerText = ` on: ${readableDate}`
+  createdAtElement.classList.add('has-text-grey')
+
+  commentElement.appendChild(idElement);
+  commentElement.appendChild(authorElement);
+  commentElement.appendChild(createdAtElement)
+  commentElement.appendChild(bodyElement);
+  commentsElement.appendChild(commentElement);
+  console.log(commentElement)
+  hydrateAuthor(commentElement);
+  console.log(commentElement)
+  
+}
+
+
+
+// async function createComment(issueElement) {
+//   let id = 0;
+//   let authorId = 0;
+//   let issueId = 0;
+//   let comment = {"data": {
+//     "id" : id,
+//     "body" : "",
+//     "author" : authorId,
+//     "issue" : issueId
+//     }
+//   };
+//   issueId = issueElement.getAttribute('data-id');
+//   let response = await fetch(`http://localhost:8000/comments.json`)
+//     .then(R => R.json())
+//     .catch(E=> null);
+//   penult = response.data[-1]
+//   authorId = penult.id + 1
+
+//   console.log(comment)
+// }

@@ -1,6 +1,6 @@
 extends base.pug
 block content
-  div(class='issue-page p-5')
+  div(class="issue-page p-5")
     div(class="issue container box has-background-primary-light" data-id=issue.id data-author=issue.author)
       h2(class="title")= issue.title
       div(class="has-text-grey")
@@ -22,8 +22,13 @@ block content
         div(class="tag is-danger is-small")= issue.status
       else if issue.status == "In Progress"
         div(class="tag is-warning is-small")= issue.status
-    
     div(class="comments container has-background-primary mg-4")
+    div(class="comment-editor container box")
+      form
+        input(type="text" name="comment-body")
+        button(class="add-comment")
+          |comment
+
 
 
   script
