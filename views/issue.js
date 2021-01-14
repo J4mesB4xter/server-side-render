@@ -15,7 +15,7 @@ function hydrateDate(issueElement) {
 
 async function hydrateAuthor(issueElement) {
   let id = issueElement.getAttribute('data-author');
-  console.log(id)
+ 
   let response = await fetch(`http://localhost:8000/contributors/${id}.json`)
     .then(R => R.json())
     .catch(E => null);
@@ -29,25 +29,30 @@ async function hydrateComments(issueElement) {
   let response = await fetch(`http://localhost:8000/comments.json/?issue=${id}`)
     .then(R => R.json())
     .catch(E => null);
-    
-  let commentsElement = document.querySelector('.comments')
+
+  let commentsElement = document.querySelector('.comments');
   for (let comment of response.data) {
     let commentElement = document.createElement('div');
-    commentElement.classList.add('box')
+    commentElement.classList.add('box');
     commentElement.setAttribute('data-author', comment.author);
 
-    let authorElement = document.createElement('div')
-    authorElement.classList.add('author')
+    let authorElement = document.createElement('div');
+    authorElement.classList.add('author');
 
     let bodyElement = document.createElement('p');
     bodyElement.innerText = comment.body;
 
+    let createdAtElement = document.createElement('p');
+    createdAtElement.innerText = comment.created_at;
+    createdAtElement.innerText = formatIso(commentElement.getAttribute('data-created-at'));
+    commentElement.appendChild(createdAtElement)
 
-    commentElement.appendChild(authorElement)
-    commentElement.appendChild(bodyElement)
-    commentsElement.appendChild(commentElement)
-    hydrateAuthor(commentElement)
+    commentElement.appendChild(authorElement);
+    commentElement.appendChild(bodyElement);
+    commentsElement.appendChild(commentElement);
+    hydrateAuthor(commentElement);
 
+    
   }
   
 }
