@@ -90,8 +90,8 @@ hydrateIssuePage()
   penult = response.data[-1]
   idElement.innerText = penult.id + 1
 
-
-  
+  let issueIdElement = document.createElement('p')
+  issueIdElement.innerText = issue.id
 
   let readableDate = formatIso(commentElement.getAttribute('data-created-at'));
   
@@ -100,15 +100,14 @@ hydrateIssuePage()
   createdAtElement.innerText = ` on: ${readableDate}`
   createdAtElement.classList.add('has-text-grey')
 
+  commentElement.appendChild(issueIdElement);
   commentElement.appendChild(idElement);
   commentElement.appendChild(authorElement);
   commentElement.appendChild(createdAtElement)
   commentElement.appendChild(bodyElement);
   commentsElement.appendChild(commentElement);
-  console.log(commentElement)
   hydrateAuthor(commentElement);
   console.log(commentElement)
-  
 }
 
 
