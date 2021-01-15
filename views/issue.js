@@ -69,7 +69,7 @@ hydrateIssuePage()
 
 //COMMENT BOX
 
-function postComment() {
+function postComment(comment) {
   let commentElement = document.createElement('div');
   commentElement.classList.add('box');
   commentElement.setAttribute('data-author', comment.author);
@@ -117,10 +117,8 @@ async function createComment(issueElement) {
   let response = await fetch(`http://localhost:8000/comments.json`)
     .then(R => R.json())
     .catch(E=> null);
-  penult = response.data[-1]
+  let penult = response.data[-1]
   id = penult.id + 1
 
   console.log(comment)
-
-  postComment(comment)
 }
