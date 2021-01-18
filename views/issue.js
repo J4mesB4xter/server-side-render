@@ -1,3 +1,6 @@
+hydrateIssuePage()
+allowNewComments()
+
 async function hydrateIssuePage() {
   let issueElement = document.querySelector('.issue');
 
@@ -60,27 +63,18 @@ async function hydrateComments(issueElement) {
 
     
   }
-  
 }
-
-hydrateIssuePage()
-allowNewComments()
-
-
 
 //COMMENT BOX
 
 async function postComment() {
-  console.log("POSTcomments")
   let id = 0;
   let authorId = 0;
   let issueId = 0;
-  let comment = {"data": {
-    "id" : id,
-    "body" : "",
-    "author" : authorId,
-    "issue" : issueId
-    }
+  let comment = {
+    "body" : "yoyoma",
+    "author" : 1,
+    "issue" : 4
   };
 
   let response = await fetch(`http://localhost:8000/comments.json`, {
