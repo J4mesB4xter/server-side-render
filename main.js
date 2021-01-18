@@ -5,6 +5,7 @@ const app = express()
 const port = 3000
 
 app.set('view engine', 'pug')
+app.use(express.static('node_modules/bulma/css'))
 
 async function readJson(filename) {
   let text = await fs.promises.readFile(filename);
@@ -43,6 +44,9 @@ async function getIssues() {
 //ISSUE VIEW ONE
 app.get('/issues/:id', async (req, res) => {
   let id = req.params.id
+  if (!id) {
+    return res.status(404).end();
+  };
   let issue = await getIssue(id)
   res.render('issue', {issue: issue})
 })
@@ -52,7 +56,7 @@ async function getIssue(id) {
   .then(R => R.json())
   .catch(async (E) => {
     let allIssues = await readJson(`./data/issues.json`);
-    return allIssues.find(I => I.id == id)
+    return {data: allIssues.data.find(I => I.id == id)}
   })
   return response.data
 }

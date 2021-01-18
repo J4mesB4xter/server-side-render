@@ -64,12 +64,18 @@ async function hydrateComments(issueElement) {
 }
 
 hydrateIssuePage()
-
+allowNewComments()
+function allowNewComments() {
+  console.log("allowcomments")
+  let button = document.querySelector(".BUTTON");
+  button.addEventListener("click", postComment);
+}
 
 
 //COMMENT BOX
 
-async function postComment(issueElement) {
+async function postComment() {
+  console.log("POSTcomments")
   let id = 0;
   let authorId = 0;
   let issueId = 0;
@@ -80,11 +86,16 @@ async function postComment(issueElement) {
     "issue" : issueId
     }
   };
-  console.log(comment)
-  issueId = issueElement.getAttribute('data-id');
-  let response = await fetch(`http://localhost:8000/comments.json`)
+
+  let response = await fetch(`http://localhost:8000/comments.json`, {
+    method: "POST",
+    body: JSON.stringify(comment),
+  })
     .then(R => R.json())
     .catch(E=> null);
+
+  console.log(response)
+  return
   let penult = response.data[-1]
   id = penult.id + 1
 
@@ -119,26 +130,26 @@ async function postComment(issueElement) {
 
 
 
-async function createComment(issueElement) {
-  let id = 0;
-  let authorId = 0;
-  let issueId = 0;
-  let comment = {"data": {
-    "id" : id,
-    "body" : "",
-    "author" : authorId,
-    "issue" : issueId
-    }
-  };
-  console.log(comment)
-  issueId = issueElement.getAttribute('data-id');
-  let response = await fetch(`http://localhost:8000/comments.json`)
-    .then(R => R.json())
-    .catch(E=> null);
-  let penult = response.data[-1]
-  id = penult.id + 1
+// async function createComment(issueElement) {
+//   let id = 0;
+//   let authorId = 0;
+//   let issueId = 0;
+//   let comment = {"data": {
+//     "id" : id,
+//     "body" : "",
+//     "author" : authorId,
+//     "issue" : issueId
+//     }
+//   };
+//   console.log(comment)
+//   issueId = issueElement.getAttribute('data-id');
+//   let response = await fetch(`http://localhost:8000/comments.json`)
+//     .then(R => R.json())
+//     .catch(E=> null);
+//   let penult = response.data[-1]
+//   id = penult.id + 1
 
-  console.log(comment)
+//   console.log(comment)
 
-  postComment(comment)
-}
+//   postComment(comment)
+// }

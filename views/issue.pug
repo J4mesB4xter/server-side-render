@@ -1,7 +1,7 @@
 extends base.pug
 block content
   div(class="issue-page p-5")
-    div(class="issue container box has-background-primary-light" data-id=issue.id data-author=issue.author)
+    div(class="issue container box has-background-primary-light" data-author=issue.author)
       h2(class="title")= issue.title
       div(class="has-text-grey")
         span
@@ -24,10 +24,9 @@ block content
         div(class="tag is-warning is-small")= issue.status
     div(class="comments container has-background-primary mg-4")
     div(class="comment-editor container box")
-      form(action="http://localhost:8000/comments.json" method=POST)
+      div
         input(type="text" name="comment-body")
-        script
-          button(class="add-comment").addEventListener("click", postComment(issueElement))
+        button(class="BUTTON")
           |comment
 
 
