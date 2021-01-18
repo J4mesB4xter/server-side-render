@@ -65,11 +65,7 @@ async function hydrateComments(issueElement) {
 
 hydrateIssuePage()
 allowNewComments()
-function allowNewComments() {
-  console.log("allowcomments")
-  let button = document.querySelector(".BUTTON");
-  button.addEventListener("click", postComment);
-}
+
 
 
 //COMMENT BOX
@@ -128,6 +124,10 @@ async function postComment() {
   console.log(commentElement)
 }
 
+function allowNewComments() {
+  let button = document.querySelector(".comment-button");
+  button.addEventListener("click", postComment);
+}
 
 
 // async function createComment(issueElement) {
