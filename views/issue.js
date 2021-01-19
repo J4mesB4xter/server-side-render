@@ -67,14 +67,13 @@ async function hydrateComments(issueElement) {
 
 //COMMENT BOX
 
-async function postComment() {
-  let id = 0;
-  let authorId = 0;
-  let issueId = 0;
+async function postComment(issueElement) {
+  let body = document.querySelector('[name="comment-body"]').value
+  let issueId = document.querySelector('.issue').getAttribute('data-id');
   let comment = {
-    "body" : "yoyoma",
-    "author" : 1,
-    "issue" : 4
+    "body" : body,
+    "author" : randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9 , 10]),
+    "issue" : parseInt(issueId)
   };
 
   let response = await fetch(`http://localhost:8000/comments.json`, {
@@ -85,10 +84,8 @@ async function postComment() {
     .catch(E=> null);
 
   console.log(response)
-  return
-  let penult = response.data[-1]
-  id = penult.id + 1
-
+  let commentsElement = document.querySelector('.comments')
+ 
   let commentElement = document.createElement('div');
   commentElement.classList.add('box');
   commentElement.setAttribute('data-author', comment.author);
@@ -100,7 +97,7 @@ async function postComment() {
   
 
   let bodyElement = document.createElement('p');
-  bodyElement.innerText = 'comment-body';
+  bodyElement.innerText = document.querySelector('[name="comment-body"]').value;
 
   let readableDate = formatIso(commentElement.getAttribute('data-created-at'));
   
@@ -109,13 +106,13 @@ async function postComment() {
   createdAtElement.innerText = ` on: ${readableDate}`
   createdAtElement.classList.add('has-text-grey')
 
-  commentElement.appendChild(idElement);
   commentElement.appendChild(authorElement);
   commentElement.appendChild(createdAtElement)
   commentElement.appendChild(bodyElement);
   commentsElement.appendChild(commentElement);
   hydrateAuthor(commentElement);
   console.log(commentElement)
+  // hydrateComments(issueElement)
 }
 
 function allowNewComments() {

@@ -13,3 +13,7 @@ function formatIso(timestamp) {
 
   return month+'/' + dt + '/'+year;
 }
+
+function randomElement(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
