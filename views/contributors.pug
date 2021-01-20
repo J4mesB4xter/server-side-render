@@ -1,0 +1,30 @@
+extends base.pug
+block content
+  div(class="container")
+    each contributor in contributors
+      div(class="contributor box has-background-primary-light")
+        h2(class="title")= contributor.username
+        div
+          span
+          | id:&nbsp;
+          span(class="tag")= contributor.id
+        div
+          span
+          | joined:&nbsp;
+          span(class="created-at")= contributor.created_at
+        div
+          span
+          | most recent activity:&nbsp;
+          span(class="tag")= contributor.last_login
+        div
+          span
+          | email:&nbsp;
+          span(class="tag")= contributor.email
+        div
+          span
+          | bio:&nbsp;
+          span(class="text")= contributor.bio
+
+    script
+      include contributors.js
+      

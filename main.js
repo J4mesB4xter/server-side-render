@@ -23,15 +23,13 @@ async function readJson(filename) {
 //     });
 //   })
 // }
-
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
 //ISSUE VIEW ALL
 app.get('/issues', async (req, res) => {
   let issues = await getIssues()
   res.render('issues', {issues: issues})
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
 })
 
 async function getIssues() {
@@ -75,5 +73,18 @@ async function getContributor(id) {
     let allContributors = await readJson(`./data/contributors.json`);
     return allContributors.find(C => C.id == id)
   })
+  return response.data
+}
+
+//CONTRIBUTOR VIEW ALL
+app.get('/contributors', async (req, res) => {
+  let contributors = await getContributors()
+  res.render('contributors', {contributors: contributors})
+})
+
+async function getContributors() {
+  let response = await fetch('http://localhost:8000/contributors.json')
+  .then(R => R.json())
+  .catch(E => readJson('./data/contributors.json'))
   return response.data
 }
