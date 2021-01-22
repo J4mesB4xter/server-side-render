@@ -8,7 +8,7 @@ function allowLoginAttempt() {
 async function authenticateUser() {
   let submission = {
     "username" : document.querySelector('[name="username"]').value,
-    "password" :   document.querySelector('[name="password"]').value
+    "password" : document.querySelector('[name="password"]').value
   };
   
   let result = await fetch(`http://localhost:8000/contributors/authenticate`, {
@@ -21,7 +21,7 @@ async function authenticateUser() {
   if (result.error) {
     return document.querySelector(".error-message").innerText = "incorrect username/password combination";
   } else {
-    localStorage.setItem("authentication-token", result.data.token);
+    document.cookie = `authentication-token=${result.data.token}`
   }
 }
 

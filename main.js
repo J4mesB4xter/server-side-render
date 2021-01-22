@@ -1,11 +1,23 @@
+const cookieParser = require('cookie-parser')
 const fetch = require('node-fetch')
 const express = require('express')
 const fs = require('fs')
 const app = express()
 const port = 3000
 
+
+
 app.set('view engine', 'pug')
 app.use(express.static('node_modules/bulma/css'))
+app.use(cookieParser())
+
+app.use((req, res, next) =>{
+  let token = req.cookies["authentication-token"]
+  console.log({token})
+
+  next()
+});
+
 
 async function readJson(filename) {
   let text = await fs.promises.readFile(filename);
