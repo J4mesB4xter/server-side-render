@@ -26,6 +26,12 @@ async function readJson(filename) {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+//AUTHENTICATE USER
+app.get('/login', async (req, res) => {
+  res.render('authenticate')
+})
+
 //ISSUE VIEW ALL
 app.get('/issues', async (req, res) => {
   let issues = await getIssues()

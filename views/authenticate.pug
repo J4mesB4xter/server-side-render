@@ -1,0 +1,12 @@
+extends base.pug
+block content
+  div(class="container")
+    p(class="error-message has-text-danger")
+    input(type="text" name="username")
+    br
+    input(type="password" name="password")
+    button(class="submit-button")
+      |submit
+
+  script
+    include authenticate.js
