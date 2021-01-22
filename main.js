@@ -2,9 +2,9 @@ const cookieParser = require('cookie-parser')
 const fetch = require('node-fetch')
 const express = require('express')
 const fs = require('fs')
+const e = require('express')
 const app = express()
 const port = 3000
-
 
 
 app.set('view engine', 'pug')
@@ -14,6 +14,10 @@ app.use(cookieParser())
 app.use((req, res, next) =>{
   let token = req.cookies["authentication-token"]
   console.log({token})
+  if (!token) {
+    res.render("authenticate")
+  }
+  
 
   next()
 });
