@@ -11,13 +11,14 @@ app.set('view engine', 'pug')
 app.use(express.static('node_modules/bulma/css'))
 app.use(cookieParser())
 
-app.use((req, res, next) =>{
-  console.log(req)
+app.use((req, res, next) => {
   let token = req.cookies['authentication-token']
   if (!token) {
     res.render('authenticate')
   }
-  next()
+  else {
+    next()
+  }
 });
 
 

@@ -66,13 +66,13 @@ async function hydrateComments(issueElement) {
 }
 
 //COMMENT BOX
-
 async function postComment(issueElement) {
   let body = document.querySelector('[name="comment-body"]').value
   let issueId = document.querySelector('.issue').getAttribute('data-id');
+  let contributor = JSON.parse(localStorage.getItem('contributor'));
   let comment = {
     "body" : body,
-    "author" : randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9 , 10]),
+    "author" : contributor.id,
     "issue" : parseInt(issueId)
   };
 

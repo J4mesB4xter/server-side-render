@@ -22,6 +22,7 @@ async function authenticateUser() {
     return document.querySelector(".error-message").innerText = "incorrect username/password combination";
   } else {
     document.cookie = `authentication-token=${result.data.token}`
+    await cacheContributor(submission.username)
     location.reload()
   }
 }
@@ -29,3 +30,12 @@ async function authenticateUser() {
 // button does nothing
 // havent returned token in js; await fetch need editing
 //
+
+async function cacheContributor(username) {
+  let contributor = await fetch(`http://localhost:8000/contributors.json/?username=${username}`)
+    .then(R => R.json())
+    .then(json => json.data[0])
+    .catch(E=> null);
+  let value = JSON.stringify(contributor)
+  localStorage.setItem("contributor", value)
+}
