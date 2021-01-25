@@ -22,6 +22,7 @@ async function authenticateUser() {
     return document.querySelector(".error-message").innerText = "incorrect username/password combination";
   } else {
     document.cookie = `authentication-token=${result.data.token}`
+    location.reload()
   }
 }
 

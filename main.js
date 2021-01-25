@@ -12,13 +12,11 @@ app.use(express.static('node_modules/bulma/css'))
 app.use(cookieParser())
 
 app.use((req, res, next) =>{
-  let token = req.cookies["authentication-token"]
-  console.log({token})
+  console.log(req)
+  let token = req.cookies['authentication-token']
   if (!token) {
-    res.render("authenticate")
+    res.render('authenticate')
   }
-  
-
   next()
 });
 
