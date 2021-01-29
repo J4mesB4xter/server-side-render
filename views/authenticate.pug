@@ -1,12 +1,18 @@
 extends base.pug
 block content
   div(class="container")
-    p(class="error-message has-text-danger")
-    input(type="text" name="username")
+    span
+      | Username:
+    span
+      input(type="text" name="username" class="is-focused mb-4 mt-4 mx-4")
     br
-    input(type="password" name="password")
+    span
+      | Password:  
+    span
+      input(type="password" name="password" class="is-focused mb-4 mx-4")
     button(class="submit-button")
       |submit
+    p(class="error-message has-text-danger")
 
   script
     include authenticate.js
