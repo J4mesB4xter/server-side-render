@@ -36,6 +36,11 @@ function getCookie(cname) {
   return "";
 }
 
+function logout() {
+  document.cookie = "authentication-token=; expires=Thur, 01 Jan 1970 00:00:00 UTC; path=/cookies"
+  location.reload()
+}
+
 function logoutToggle() {
   var token = getCookie("authentication-token");
   if (!token) {
@@ -43,6 +48,7 @@ function logoutToggle() {
   }
   else {
     document.querySelector(".login-button").innerText = "Logout";
+    document.querySelector(".login-button").addEventListener("click", logout);
   }
   return
 }
