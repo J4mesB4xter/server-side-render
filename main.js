@@ -14,7 +14,11 @@ app.use(cookieParser())
 app.use((req, res, next) => {
   let token = req.cookies['authentication-token']
   if (!token) {
-    res.render('authenticate')
+    if (req.path != '/login') {
+      res.redirect('/login');
+    } else {
+        next()
+    }
   }
   else {
     next()
