@@ -1,4 +1,3 @@
-// do a post request
 allowLoginAttempt()
 function allowLoginAttempt() {
   let button = document.querySelector(".submit-button");
@@ -26,10 +25,6 @@ async function authenticateUser() {
     location.reload()
   }
 }
-
-// button does nothing
-// havent returned token in js; await fetch need editing
-//
 
 async function cacheContributor(username) {
   let contributor = await fetch(`http://localhost:8000/contributors.json/?username=${username}`)
